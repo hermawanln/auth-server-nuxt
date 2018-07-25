@@ -5,11 +5,15 @@ const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
+const api = require('./routes/api')
+
 app.set('port', port)
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
+
+app.use('/api', api)
 
 async function start() {
   // Init Nuxt.js
@@ -18,7 +22,8 @@ async function start() {
   // Build only in dev mode
   if (config.dev) {
     const builder = new Builder(nuxt)
-    await builder.build()
+    // FIXME: ini nyalakan lagi, buat garap frontend
+    // await builder.build()
   }
 
   // Give nuxt middleware to express
