@@ -1,6 +1,8 @@
 
 const express = require('express')
 const { Nuxt, Builder } = require('nuxt')
+var bodyParser = require('body-parser');
+
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
@@ -25,6 +27,9 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true }, function (err) {
     console.log('mongo connected', mongoUrl)
   }
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // route backend
 app.use('/api', api)
