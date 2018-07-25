@@ -89,7 +89,7 @@ module.exports = {
             var token = jwt.sign(
               {
                 username: user.username,
-                email: user.email
+                roles: user.roles
               },
               process.env.JWT_SECRET,
               { expiresIn: '1d' }
