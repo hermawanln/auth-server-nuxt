@@ -13,6 +13,20 @@ app.set('port', port)
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
 
+// koneksi mongo
+let mongoose = require('mongoose');
+let mongoUrl = 'mongodb://localhost:27017/akufls'
+
+mongoose.Promise = global.Promise;
+mongoose.connect(mongoUrl, { useNewUrlParser: true }, function (err) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log('mongo connected', mongoUrl)
+  }
+});
+
+// route backend
 app.use('/api', api)
 
 async function start() {
