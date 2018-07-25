@@ -1,4 +1,3 @@
-
 const express = require('express')
 const { Nuxt, Builder } = require('nuxt')
 var bodyParser = require('body-parser');
