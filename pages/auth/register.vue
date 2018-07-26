@@ -59,7 +59,7 @@
           ></v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" flat>Login saja</v-btn>
+          <v-btn to="/auth/login" color="primary" flat>Login saja</v-btn>
           <v-spacer></v-spacer>
           <v-btn @click="submit()" :loading="loadingSubmit" color="primary">Buat Akun</v-btn>
         </v-card-actions>
@@ -95,6 +95,7 @@ export default {
           }).then(response => {
             console.log('ok', response);
             this.clear()
+            this.$router.push('/auth/login')
             this.loadingSubmit = false
           }).catch(err => {
             console.log('err', err);
