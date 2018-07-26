@@ -7,7 +7,7 @@ const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
-const api = require('./routes/api')
+const auth = require('./routes/auth')
 
 app.set('port', port)
 
@@ -32,10 +32,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // route backend
-app.use('/api', function (req, res) {
+app.use('/api/ping', function (req, res) {
   res.json('pong')
 })
-app.use('/api/auth', api)
+app.use('/api/auth', auth)
 
 async function start() {
   // Init Nuxt.js
