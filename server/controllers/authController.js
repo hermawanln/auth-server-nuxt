@@ -88,7 +88,8 @@ module.exports = {
           } else {
             var token = jwt.sign(
               {
-                username: user.username,
+                sub: user.id,
+                name: user.info.fullName,
                 roles: user.roles
               },
               process.env.JWT_SECRET,
@@ -108,11 +109,22 @@ module.exports = {
   pingMe: function (req, res, next) {
     jwt.verify(req.headers.authorization, process.env.JWT_SECRET, function (err, decoded) {
       if (err) {
-        res.status(400).send(err)
+        res.status(401).send(err)
       } else {
-        res.json({
-          user: decoded
-        });
+        User.findById(decoded.sub, function (err, user) {
+          if (err) return res.status(500).send(err)
+          res.json({
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            roles: user.roles,
+            info: user.info,
+            banned: user.banned,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+          })
+        })
       }
     });
   },
