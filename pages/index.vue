@@ -35,6 +35,22 @@ import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
 
 export default {
+  methods: {
+    tes () {
+      this.$axios.$get('/api/auth', {
+        headers: {
+          Authorization: 'eJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Indrd2tjb2JhIiwicm9sZXMiOltdLCJpYXQiOjE1MzI1NDM2NzksImV4cCI6MTUzMjYzMDA3OX0.7sUGrwYvAhK_H-7HIrwV5_oQjciso-l3ThRMdTjHB84'
+        }
+      }).then(response => {
+        console.log('ok', response)
+      }).catch(err => {
+        console.log('err', err);
+      })
+    }
+  },
+  mounted () {
+    this.tes()
+  },
   components: {
     Logo,
     VuetifyLogo
