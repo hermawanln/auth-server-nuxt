@@ -37,7 +37,7 @@ module.exports = {
 
     user.save(function(err) {
       if (err) {
-        res.send(err);
+        res.status(500).send(err);
       } else {
         res.send({
           success: true,
@@ -49,7 +49,7 @@ module.exports = {
   },
   login: function(req, res, next) {
     if (req.body.username == "" || req.body.password == "") {
-      res.json({
+      res.status(400).json({
         success: false,
         status: "ERROR",
         message: "Username and Password can not empty"
@@ -59,13 +59,13 @@ module.exports = {
         if (err) {
           console.log("Error when trying to login : ", err);
 
-          res.json({
+          res.status(500).json({
             success: false,
             status: "ERROR",
             message: err
           });
         } else if (!user) {
-          res.json({
+          res.status(400).json({
             success: false,
             status: "ERROR",
             message: "Authentication failed. User not found."
@@ -74,13 +74,13 @@ module.exports = {
           let reqPasswordData = hashPassword(req.body.password, user.salt);
 
           if(user.password != reqPasswordData){
-            res.json({
+            res.status(403).json({
               success: false,
               status: "ERROR",
               message: "Authentication failed. Wrong password."
             });
-          } else if (user.isBanned) {
-            res.json({
+          } else if (user.banned.status) {
+            res.status(403).json({
               success: false,
               status: "ERROR",
               message: "Authentication failed. User got banned. Please Call Admin."
@@ -108,7 +108,7 @@ module.exports = {
   pingMe: function (req, res, next) {
     jwt.verify(req.headers.authorization, process.env.JWT_SECRET, function (err, decoded) {
       if (err) {
-        res.send(err)
+        res.status(400).send(err)
       } else {
         res.json({
           user: decoded
