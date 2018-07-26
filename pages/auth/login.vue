@@ -9,7 +9,8 @@
           label="Email"
           id="email"
           v-model="email"
-          required></v-text-field>
+          required
+        ></v-text-field>
       </v-card-text>
     </v-card>
   </v-layout>
