@@ -44,7 +44,7 @@ export default {
       }).then(response => {
         console.log('ok', response)
       }).catch(err => {
-        console.log('err', err);
+        console.log('err', err.response.data);
       })
     }
   },

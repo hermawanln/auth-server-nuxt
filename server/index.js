@@ -47,7 +47,7 @@ async function start() {
   if (config.dev) {
     const builder = new Builder(nuxt)
     // FIXME: ini nyalakan lagi, buat garap frontend
-    // await builder.build()
+    await builder.build()
   }
 
   // Give nuxt middleware to express
