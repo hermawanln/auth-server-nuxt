@@ -8,6 +8,7 @@ const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
 const auth = require('./routes/auth')
+const user = require('./routes/user')
 
 app.set('port', port)
 
@@ -36,6 +37,7 @@ app.use('/api/ping', function (req, res) {
   res.json('pong')
 })
 app.use('/api/auth', auth)
+app.use('/api/user', user)
 
 async function start() {
   // Init Nuxt.js
