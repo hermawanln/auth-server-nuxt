@@ -32,6 +32,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // route backend
+app.use('/api', function (req, res) {
+  res.json('pong')
+})
 app.use('/api/auth', api)
 
 async function start() {

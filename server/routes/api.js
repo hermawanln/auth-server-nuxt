@@ -9,5 +9,6 @@ router.get('/', authController.pingMe);
 router.post('/register', authController.register)
 router.post('/login', authController.login)
 
+router.get('/all', userController.index)
 
 module.exports = router;
