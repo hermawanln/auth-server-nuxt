@@ -14,7 +14,7 @@
           router
           :to="item.to"
           :key="i"
-          v-for="(item, i) in items"
+          v-for="(item, i) in menuItems"
           exact
         >
           <v-list-tile-action>
@@ -31,7 +31,7 @@
       <v-toolbar-title v-text="title" style="cursor: pointer" @click="$router.push('/')"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn v-for="(item, index) in items" :key="index" :to="item.to" flat>{{ item.title }}</v-btn>
+        <v-btn v-for="(item, index) in menuItems" :key="index" :to="item.to" flat>{{ item.title }}</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
@@ -46,16 +46,26 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        title: 'Akun FLS',
-        drawer: false,
-        items: [
+export default {
+  data() {
+    return {
+      title: 'Akun FLS',
+      drawer: false,
+    }
+  },
+  computed: {
+    menuItems () {
+      if (this.$store.getters.isLogedIn) {
+        return [
           { icon: 'apps', title: 'Profile', to: '/profile' },
           { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
-        ],
+        ]
+      } else {
+        return [
+          { icon: 'bubble_chart', title: 'Login', to: '/auth/login' }
+        ]
       }
     }
   }
+}
 </script>
