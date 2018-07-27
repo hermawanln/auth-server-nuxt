@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data () {
     return {
@@ -48,6 +50,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setToken', 'setAuthInfo']),
     login () {
       this.$validator.validateAll().then(valid => {
         if (valid) {
@@ -56,7 +59,9 @@ export default {
             username: this.username,
             password: this.password
           }).then(response => {
-            console.log('ok', response);
+            console.log('ok', response)
+            this.setToken(response.token)
+            this.setAuthInfo(response.token)
             this.$router.push('/profile')
             this.loadingLogin = false
           }).catch(err => {
