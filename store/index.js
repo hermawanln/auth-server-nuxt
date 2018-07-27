@@ -19,26 +19,30 @@ const createStore = () => {
       }
     },
     actions: {
-      reauth ({ commit }) {
+      initAuth ({ commit }) {
         console.log('init auth');
-        let token = localStorage.getItem('token')
-        let dataUser = localStorage.getItem('authInfo')
+        if (process.browser) {
+          let token = localStorage.getItem('token')
+          let dataUser = localStorage.getItem('authInfo')
+          commit('SET_TOKEN', token)
+          commit('SET_AUTH_INFO', JSON.parse(JSON.stringify(dataUser)))
+        }
 
-        commit('SET_TOKEN', token)
-        commit('SET_AUTH_INFO', JSON.parse(dataUser))
       },
       setToken({ commit }, token) {
         commit('SET_TOKEN', token)
-        localStorage.setItem('token', token)
+        if (process.browser) localStorage.setItem('token', token)
       },
       setAuthInfo({ commit }, token) {
         commit('SET_AUTH_INFO', jwtDecode(token))
-        localStorage.setItem('authInfo', jwtDecode(token))
+        if (process.browser) localStorage.setItem('authInfo', jwtDecode(token))
       },
       logout ({ commit }) {
         commit('CLEAR_TOKEN');
-        localStorage.removeItem('token')
-        localStorage.removeItem('authInfo')
+        if (process.browser) {
+          localStorage.removeItem('token')
+          localStorage.removeItem('authInfo')
+        }
       }
     },
     getters: {

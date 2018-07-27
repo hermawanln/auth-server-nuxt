@@ -6,7 +6,7 @@
       <h1>An error occurred: {{ error.statusCode }}</h1>
       <p>{{ error.message }}</p>
     </template>
-    <nuxt-link v-if="!error.init" to="/">Home page</nuxt-link>
+    <nuxt-link v-show="!error.init" to="/">Home page</nuxt-link>
   </div>
 </template>
 
