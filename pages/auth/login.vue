@@ -2,7 +2,7 @@
   <v-layout justify-center>
     <v-flex md4>
       <v-card>
-        <v-card-title>Login</v-card-title>
+        <v-card-title class="title">Login</v-card-title>
         <v-card-text>
           <!-- TODO: implemen vee validate -->
           <v-text-field

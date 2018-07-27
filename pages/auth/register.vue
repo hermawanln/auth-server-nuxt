@@ -2,7 +2,7 @@
   <v-layout justify-center>
     <v-flex md4>
       <v-card>
-        <v-card-title>Buat Akun</v-card-title>
+        <v-card-title class="title">Buat Akun</v-card-title>
         <v-card-text>
           <v-text-field
             v-model="email"
