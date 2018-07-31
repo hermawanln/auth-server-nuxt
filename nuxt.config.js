@@ -39,6 +39,7 @@ module.exports = {
   plugins: [
     '@/plugins/vuetify',
     '@/plugins/vee-validate',
+    '@/plugins/axios',
     '@/plugins/init-auth',
   ],
 

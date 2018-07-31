@@ -49,7 +49,7 @@
 export default {
   data() {
     return {
-      title: 'Akun FLS',
+      title: 'Akun',
       drawer: false,
     }
   },
